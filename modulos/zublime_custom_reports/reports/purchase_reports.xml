@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_ticket_solicitud_cotizacion" model="ir.actions.report">
+        <field name="name">Ticket Solicitud de cotización</field>
+        <field name="model">purchase.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">zublime_custom_reports.ticket_solicitud_cotizacion</field>
+        <field name="report_file">zublime_custom_reports.ticket_solicitud_cotizacion</field>
+        <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="zublime_custom_reports.paperformat_ticket_purchase"/>
+    </record>
+
+    <record id="action_report_ticket_pedido_compra" model="ir.actions.report">
+        <field name="name">Ticket Pedido de compra</field>
+        <field name="model">purchase.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">zublime_custom_reports.ticket_pedido_compra</field>
+        <field name="report_file">zublime_custom_reports.ticket_pedido_compra</field>
+        <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="zublime_custom_reports.paperformat_ticket_purchase"/>
+    </record>
+</odoo>
