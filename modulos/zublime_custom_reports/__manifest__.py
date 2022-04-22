@@ -16,6 +16,7 @@
         'reports/ticket_purchase_pedido_compra_template.xml',
         'reports/ticket_sale_cotizacion_template.xml',
         'reports/ticket_sale_order_template.xml',
+        'reports/ticket_operacion_recoleccion_template.xml',
         
         'reports/paperformat_reports.xml',
         'reports/purchase_reports.xml',
