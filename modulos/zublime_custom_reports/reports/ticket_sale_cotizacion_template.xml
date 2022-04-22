@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
-    <template id="report_body_solicitud_cotizacion_ticket">
+    <template id="report_body_sale_cotizacion_ticket">
         <div class="page" style="font-size: 60%">
             <div class="row">
                 <div class="col-12 text-center">
-                    <strong>Solicitud de Cotización <span t-field="o.display_name"/></strong>
+                    <strong>Cotización <span t-field="o.display_name"/></strong>
                 </div>
             </div>
             <div class="row">
@@ -21,17 +21,7 @@
             </div>
             <div class="row">
                 <div class="col-12 text-left">
-                    <strong>Almacén que recibe:</strong>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 text-left">
-                    <span t-field="o.picking_type_id.display_name"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 text-left">
-                    <strong>Proveedor:</strong>
+                    <strong>Cliente:</strong>
                 </div>
             </div>
             <div class="row">
@@ -49,37 +39,57 @@
                     <span t-field="o.user_id.display_name"/>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12 text-left">
+                    <strong>Fecha de cotización:</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-left">
+                    <span t-field="o.date_order"/>
+                </div>
+            </div>
             <br/>
             <div class="row">
                 <div class="col-12">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Qty</th>
-                                <th>Descripción</th>
-                                <th>Fecha Prevista</th>
-                            </tr>
-                        </thead>
+                    <table style="width: 100%;">
                         <tbody>
+                            <tr>
+                                <th style="padding-right: 10px">Qty</th>
+                                <th style="width: 100%;">Descripción</th>
+                                <th>Total</th>
+                            </tr>
                             <tr t-foreach="o.order_line" t-as="line">
                                 <td><span t-field="line.product_qty"/></td>
-                                <td><span t-field="line.name"/></td>
-                                <td><span t-field="line.date_planned"/></td>
+                                <td>
+                                    <span t-field="line.product_id.name"/>
+                                    <span style="display: block;" t-if="line.product_id.barcode" t-field="line.product_id.barcode"/>
+                                    <span style="display: block;">1x<span t-field="line.price_unit" t-options="{'widget': 'monetary'}"/></span>
+                                </td>
+                                <td><span t-field="line.price_total"/></td>
                             </tr>
                         </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="total" class="row justify-content-end">
+                <div class="col-7">
+                    <table class="table table-sm">
+                        <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
+                        <t t-call="account.document_tax_totals"/>
                     </table>
                 </div>
             </div>
         </div>
     </template>
 
-    <template id="ticket_solicitud_cotizacion">
+    <template id="ticket_sale_cotizacion">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.basic_layout">
                     <t t-call="zublime_custom_reports.report_cabecera_ticket_custom"/>
                     <br/>
-                    <t t-call="zublime_custom_reports.report_body_solicitud_cotizacion_ticket"/>
+                    <t t-call="zublime_custom_reports.report_body_sale_cotizacion_ticket"/>
                     <br/>
                     <t t-call="zublime_custom_reports.report_pie_pagina_ticket_custom"/>
                 </t>
